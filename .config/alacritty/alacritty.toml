@@ -1,0 +1,42 @@
+import = [
+    "~/.config/alacritty/themes/themes/afterglow.toml"
+]
+live_config_reload = true
+[window]
+
+opacity = 0.9
+
+padding.x = 10
+padding.y = 10
+
+decorations = "Full"
+decorations_theme_variant = "Light" # "Dark"
+
+[font]
+
+[font.bold]
+family = "SF Mono"
+style = "Heavy"
+
+[font.bold_italic]
+family = "SF Mono"
+style = "Heavy Italic"
+
+[font.italic]
+family = "SF Mono"
+style = "Medium Italic"
+
+[font.normal]
+family = "SF Mono"
+style = "Medium"
+
+
+
+[env]
+TERM = "xterm-256color"
+
+[[hints.enabled]]
+regex = "[^ ]+\\.rs:\\d+:\\d+"
+command = { program = "code", args = [ "--goto" ] }
+mouse = { enabled = true }
+

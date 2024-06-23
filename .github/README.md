@@ -8,6 +8,7 @@ These dotfile add stuff for Xorg and Wayland.
 
 ## For both
 
+- alacritty
 - barriers
 - calcurse
 - dunst
@@ -44,7 +45,6 @@ These dotfile add stuff for Xorg and Wayland.
 
 - Hyprland
 - Hyprlock
-- alacritty
 - calcurse
 - ncmpcpp
 - newsboat
