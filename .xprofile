@@ -1,0 +1,24 @@
+#!/bin/sh
+xrandr --output HDMI-0 --mode 1920x1080 --right-of DP-0 --mode 1920x1080
+~/.fehbg  #not needed
+#compton &
+xcompmgr&   # not needed
+
+spotifyd # done
+
+dwmbar&
+
+dunst & # done
+sxhkd &
+udiskie &  # done
+unclutter &   # builtin
+
+barriers --disable-crypto &  # done
+
+numlockx & # builtin
+
+
+while pgrep -x mpd; do
+    mpc idle >/dev/null 2>&1
+    refbar
+done &

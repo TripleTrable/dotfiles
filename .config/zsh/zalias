@@ -1,0 +1,14 @@
+#vi:syntax=zsh
+
+alias sudo='sudo '
+alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+alias v='nvim'
+alias dnb='dotnet build'
+alias dnr='dotnet run'
+alias hibernate="sudo systemctl hibernate"
+alias code="code-insiders"
+alias z='zathura'
+alias c='calcurse'
+alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/isync/mbsyncrc'
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget/wget-hsts"'
+alias ip="ip -c"
