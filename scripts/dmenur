@@ -1,0 +1,3 @@
+#!/bin/sh
+dmenu_path | grep -Evf ~/.config/dmenu_blacklist | dmenu "$@" | ${SHELL:-"/bin/sh"} &
+
