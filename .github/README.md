@@ -1,13 +1,19 @@
 My Hyprland setup
 =================
 
-These dotfile add stuff for Xorg and Wayland.
-`tty1` start a X session and `tty2` starts Hyprland.
+These dotfile add stuff Wayland.
+`tty1` start Hyprland.
 
 # Dependencies
 
-## For both
 
+## For Wayland
+
+- Hypridle
+- Hyprland
+- Hyprlock
+- wofi
+- xdg-desktop-portal-hyprland-git
 - alacritty
 - barriers
 - calcurse
@@ -19,26 +25,6 @@ These dotfile add stuff for Xorg and Wayland.
 - udiskie
 - zathura
 - zsh
-
-## For Xorg
-
-- Xserver
-- dwm
-- feh
-- numlockx
-- slock
-- st
-- sxhkd
-- unclutter
-- xcompmgr
-
-## For Wayland
-
-- Hypridle
-- Hyprland
-- Hyprlock
-- wofi
-- xdg-desktop-portal-hyprland-git
 
 
 # Software not done yet
@@ -53,3 +39,7 @@ These dotfile add stuff for Xorg and Wayland.
 - wofi
 - zathura
 
+# Missing software
+
+passmenu
+passotp
