@@ -29,8 +29,6 @@ These dotfile add stuff Wayland.
 
 # Software not done yet
 
-- Hyprland
-- Hyprlock
 - calcurse
 - ncmpcpp
 - newsboat
@@ -39,7 +37,8 @@ These dotfile add stuff Wayland.
 - wofi
 - zathura
 
-# Missing software
+# Patching needed for good Hyprland
 
-passmenu
-passotp
+- Fix monocle layout
+    - Fix resize issue (must have)
+    - make windows render over each other (QoL)
