@@ -1,9 +1,31 @@
 #!/bin/bash
+
+
+
+usage() {
+    echo " --no-aur         Skip updating the aur"
+}
+
+while [ -n "$1" ] ; do
+    case "$1" in
+        --no-aur)
+            SKIP_AUR=true
+            ;;
+        *)
+            usage
+            exit 1
+            ;;
+    esac
+    shift
+done
+
+
+
 # System Update
 # ---------------------------
 # Snapshot - Rollback - Btrfs
 # ---------------------------
-set -x
+
 set -e
 MV=/usr/bin/mv
 BTRFS=/usr/bin/btrfs
@@ -36,18 +58,13 @@ sudo  $CP -v /boot/initramfs-linux.img /boot/initramfs-linux-stable.img
 # ---------------------------
 
 sudo  $REFLECTOR --verbose -l 10 --sort rate --protocol https --save /etc/pacman.d/mirrorlist
+
 sudo  $PACMAN -Syu
-$PACAUR --noconfirm -Syua
 
-# ---------------------------
-#    Update Hyprland plugins
-# --------------------------
 
-hyprpm update
-
+[ -z "$SKIP_AUR" ] && $PACAUR --noconfirm -Syua
 # ---------------------------
 #    Balance Filesystem
 # --------------------------
 
 sudo  $BTRFS balance start -dusage=5 /btrfs
-
