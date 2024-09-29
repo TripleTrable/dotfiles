@@ -34,6 +34,7 @@ fi
 ####### Custom #######
 ######################
 
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
 
 vsc() {find ~/scripts | fzf | xargs sh -c 'nvim "$@" < /dev/tty' nvim;}
 vso() {find ~/.config | fzf | xargs sh -c 'nvim "$@" < /dev/tty' nvim;}
@@ -153,11 +154,11 @@ compctl -K _dotnet_zsh_complete dotnet
 
 # Virtualenv support
 
-#function virtual_env_prompt () {
-#    REPLY=${VIRTUAL_ENV+(${VIRTUAL_ENV:t}) }
-#}
-#grml_theme_add_token  virtual-env -f virtual_env_prompt '%F{magenta}' '%f'
-#zstyle ':prompt:grml:left:setup' items rc virtual-env change-root user at host path vcs percent
+function virtual_env_prompt () {
+    REPLY=${VIRTUAL_ENV+(${VIRTUAL_ENV:t}) }
+}
+grml_theme_add_token  virtual-env -f virtual_env_prompt '%F{magenta}' '%f'
+zstyle ':prompt:grml:left:setup' items rc virtual-env change-root user at host path vcs percent
 
 ## ZLE tweaks ##
 
@@ -291,7 +292,6 @@ compctl -K _dotnet_zsh_complete dotnet
 ## sources
 [ -f /usr/share/zsh/site-functions/git-flow-completion.zsh ] && source /usr/share/zsh/site-functions/git-flow-completion.zsh
 [ -f ~/.config/zsh/zalias ] && source ~/.config/zsh/zalias
-[ -f ~/.config/zsh/completion/pio ] && source ~/.config/zsh/completion/pio
 [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [ -f ~/.config/zsh/tldr_complete.zsh ] && source ~/.config/zsh/tldr_complete.zsh
 ## global aliases (for those who like them) ##
@@ -328,7 +328,7 @@ compctl -K _dotnet_zsh_complete dotnet
 ## miscellaneous code ##
 
 ## Use a default width of 80 for manpages for more convenient reading
-#export MANWIDTH=${MANWIDTH:-80}
+export MANWIDTH=${MANWIDTH:-80}
 
 ## Set a search path for the cd builtin
 #cdpath=(.. ~)
@@ -374,14 +374,14 @@ compctl -K _dotnet_zsh_complete dotnet
 #    fi
 #}
 
-## Find out which libs define a symbol
-#lcheck() {
-#    if [[ -n "$1" ]] ; then
-#        nm -go /usr/lib/lib*.a 2>/dev/null | grep ":[[:xdigit:]]\{8\} . .*$1"
-#    else
-#        echo "Usage: lcheck <function>" >&2
-#    fi
-#}
+# Find out which libs define a symbol
+lcheck() {
+    if [[ -n "$1" ]] ; then
+        nm -go /usr/lib/lib*.a 2>/dev/null | grep ":[[:xdigit:]]\{8\} . .*$1"
+    else
+        echo "Usage: lcheck <function>" >&2
+    fi
+}
 
 ## Download a file and display it locally
 #uopen() {
@@ -465,25 +465,12 @@ weh() { perl -le 'print pack "H*","'$1'"' }
 #vimhelp ()    { vim -c "help $1" -c on -c "au! VimEnter *" }
 zmodload zsh/complist
 autoload -Uz compinit
-for dump in "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"(N.mh+24); do
-compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
-done
-
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 zle     -N   fzf-history-widget
 bindkey '^R' fzf-history-widget
-## END OF FILE #################################################################
 
 #source ~/repos/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
+## END OF FILE #################################################################
+
 export SSLKEYLOGFILE=~/.cache/.ssl-key.log
-
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-  SESSION_TYPE=remote/ssh
-  export GPG_TTY=$(tty)
-fi
-gpgconf --create-socketdir
-
-# Begin: PlatformIO Core completion support
-#eval "$(_PIO_COMPLETE=zsh_source pio)"
-# End: PlatformIO Core completion support
