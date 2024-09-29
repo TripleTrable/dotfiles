@@ -26,7 +26,7 @@ lsp.on_attach(function(client, bufnr)
 
   vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
   vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
-  vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
+  vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
   vim.keymap.set("n", "gh", '<cmd>ClangdSwitchSourceHeader<cr>', opts)
   vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
   vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
@@ -37,8 +37,10 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
   vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+
 end)
 
+lsp.setup()
 
 require('lspconfig').ltex.setup({
   filetypes = {  "markdown", "md", "tex" },  flags = { debounce_text_changes = 300 },
@@ -47,8 +49,8 @@ require('lspconfig').ltex.setup({
       language = "de-DE",
       setenceCacheSize = 2000,
       additionalRules = {
-        enablePickyRules = true,
-        motherTongue = "de-DE",
+      	enablePickyRules = true,
+      	motherTongue = "de-DE",
       },
       trace = { server = "verbose" },
       disabledRules = {},
@@ -60,7 +62,14 @@ require('lspconfig').ltex.setup({
   on_attach = on_attach,
 })
 
+local omnisharp_bin = "/home/lars/scripts/omnisharp_run"
 
-lsp.setup()
+local pid = vim.fn.getpid()
+require'lspconfig'.omnisharp.setup{
+    cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
+}
 
-
+require'lspconfig'.jdtls.setup
+{
+    cmd = {'/usr/bin/jdtls'},
+}

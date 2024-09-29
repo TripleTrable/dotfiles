@@ -15,6 +15,7 @@ vim.g.vimtex_toc_config = {
     indent_levels = 1,
     todo_sorted = 1,
 }
+
 vim.g.vimtex_compiler_method = "latexmk"
 
 vim.g.vimtex_compiler_latexmk = {
@@ -26,4 +27,3 @@ vim.g.vimtex_compiler_latexmk = {
         '-interaction=nonstopmode',
     },
 }
-

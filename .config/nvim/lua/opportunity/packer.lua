@@ -13,7 +13,6 @@ return require('packer').startup(function(use)
 	  -- or                            , branch = '0.1.x',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
-  use('nvim-telescope/telescope-fzy-native.nvim')
 
   use({'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'})
   use('nvim-treesitter/playground')
@@ -65,9 +64,8 @@ return require('packer').startup(function(use)
   use { "liuchengxu/graphviz.vim" }
 
   use { "mfussenegger/nvim-lint" }
-  use { "rshkarin/mason-nvim-lint" }
+  use { "rshkarin/mason-nvim-lint"}
 
-  use { "barreiroleo/ltex-extra.nvim" }
-  use { "wannesm/wmgraphviz.vim" }
+  use { "barreiroleo/ltex-extra.nvim"}
 
 end)
