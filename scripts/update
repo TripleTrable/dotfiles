@@ -4,12 +4,16 @@
 
 usage() {
     echo " --no-aur         Skip updating the aur"
+    echo " --no-reflector   Skip Reflector rating"
 }
 
 while [ -n "$1" ] ; do
     case "$1" in
         --no-aur)
             SKIP_AUR=true
+            ;;
+        --no-reflector)
+            SKIP_REFLECTOR=true
             ;;
         *)
             usage
@@ -57,7 +61,9 @@ sudo  $CP -v /boot/initramfs-linux.img /boot/initramfs-linux-stable.img
 #      Update System
 # ---------------------------
 
-sudo  $REFLECTOR --verbose -l 10 --sort rate --protocol https --save /etc/pacman.d/mirrorlist
+[ -z "$SKIP_REFLECTOR" ] && sudo  $REFLECTOR --verbose -l 10 --sort rate --protocol https --save /etc/pacman.d/mirrorlist
+[ -z "$SKIP_REFLECTOR" ] || sudo  $REFLECTOR --verbose -l 10 --protocol https --save /etc/pacman.d/mirrorlist
+
 
 sudo  $PACMAN -Syu
 
