@@ -1,0 +1,63 @@
+#!/bin/bash
+set -o errexit -o pipefail -o noclobber -o nounset
+
+PACMAN=/usr/bin/pacman
+PACAUR=/usr/bin/paru
+COMM=/usr/bin/comm
+SORT=/usr/bin/sort
+
+die() {
+    	cat <<EOF
+Usage: $(basename $0) [OPTION]...
+List packages installed from the aur
+
+
+Options:
+-l, --list      use a long listing format
+EOF
+}
+
+# ignore errexit with `&& true`
+getopt --test > /dev/null && true
+if [[ $? -ne 4 ]]; then
+    echo "This script needs util-linux getopt"
+    exit 1
+fi
+
+LONGOPTS=list
+OPTIONS=l
+
+PARSED=$(getopt --options=$OPTIONS --longoptions=$LONGOPTS --name "$0" -- "$@") || exit 2
+
+eval set -- "$PARSED"
+
+LIST_OUTPUT=0
+while true; do
+    case "$1" in
+        -l|--list)
+            LIST_OUTPUT=1
+            shift
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            die
+            exit 1
+            ;;
+    esac
+done
+
+
+
+AUR_LIST="$($PACAUR -Slq aur)"
+INSTALLED_LIST="$(pacman -Qq)"
+
+AUR_LIST_SORTED=$(echo "${AUR_LIST}" | sort )
+INSTALLED_LIST_SORTED=$(echo "$INSTALLED_LIST" | sort )
+
+AUR_PKGS=$(comm -12 <(echo "$AUR_LIST_SORTED") <(echo "$INSTALLED_LIST_SORTED"))
+
+(( $LIST_OUTPUT == 0))  && echo "$AUR_PKGS" | column && exit 0
+(( $LIST_OUTPUT == 1))  && echo "$AUR_PKGS"
