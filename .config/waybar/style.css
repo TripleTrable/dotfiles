@@ -1,0 +1,120 @@
+
+
+@define-color accent #383838;
+@define-color text #f8f8f8;
+@define-color invText #f8f8f8;
+/* text when background is accent */
+@define-color bg #181818;
+
+
+/* @import "./wal.css";
+@define-color accent @color5;
+@define-color bg @background;
+@define-color text @foreground; */
+
+@define-color base00 #222222; /* background (unselected tag + right bg) */
+@define-color base01 #005577;
+@define-color base02 #38ff38;
+@define-color base03 #5858ff;
+@define-color base04 #b8b8b8;
+@define-color base05 #d8d8d8;
+@define-color base06 #e8e8e8;
+@define-color base07 #f8f8f8;
+@define-color base08 #ab4642;
+@define-color base09 #dc9656;
+@define-color base0A #f7ca88;
+@define-color base0B #a1b56c;
+@define-color base0C #86c1b9;
+@define-color base0D #7cafc2;
+@define-color base0E #ba8baf;
+@define-color base0F #a16946;
+
+
+@define-color accent @base01;
+@define-color text @base07;
+@define-color invText @base07;
+/* text when background is accent */
+@define-color bg @base00;
+
+* {
+  font-family: SFMonoNerdFontMono;
+  font-size: 14px;
+  border-radius: 0px;
+  /* :[ */
+  min-height: 0px;
+}
+
+window#waybar {
+  background-color: @accent;
+  color: @text;
+  opacity: 1;
+}
+
+#workspaces {
+  background-color: transparent;
+}
+
+#workspaces button {
+  padding: 0 0px;
+	color: #005577;
+    font-weight: 900;
+}
+
+#workspaces button.empty {
+  padding: 0 0px;
+	color: @text;
+    font-weight: normal;
+}
+
+
+#workspaces button.persistent {
+  padding: 0 0px;
+	color: @text;
+}
+
+#workspaces button.active {
+  background-color: @accent;
+  color: @invText;
+  /* color: @background; */
+}
+
+
+#pulseaudio,
+#cpu,
+#memory,
+#temperature,
+#battery,
+#clock,
+#tray,
+#custom-icon {
+  background-color: transparent;
+  color: @text;
+  margin: 0px;
+}
+
+#custom-icon {
+  padding: 0 5px;
+	color: @text;
+}
+
+#idle_inhibitor {
+  padding: 0px 0px 0px 10px;
+	color: @text;
+}
+
+.modules-left {
+  background-color: @bg;
+  padding: 0px 0px 0px 0px;
+}
+
+#window {
+  color: @invText;
+  background-color: @accent;
+  padding-left: 5px;
+}
+
+.modules-right {
+  background-color: @bg;
+  padding: 0px 0px 0px 0px;
+}
+
