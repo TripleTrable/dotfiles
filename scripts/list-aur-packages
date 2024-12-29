@@ -49,7 +49,9 @@ while true; do
     esac
 done
 
-
+if [ ! -t 1 ] ; then
+    LIST_OUTPUT=1
+fi
 
 AUR_LIST="$($PACAUR -Slq aur)"
 INSTALLED_LIST="$(pacman -Qq)"
