@@ -1,2 +1,3 @@
-require("opportunity")
-require("opportunity.packer")
+require("voyager.core")
+
+require("voyager.lazy")

@@ -30,3 +30,4 @@ vim.opt.updatetime = 50
 vim.o.wildmode = "longest,list:longest,full"
 
 vim.opt.mouse = ""
+
