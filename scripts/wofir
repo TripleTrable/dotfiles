@@ -1,0 +1,3 @@
+#!/bin/sh
+wofi_path | grep -Evf $HOME/.config/wofi_blacklist | tofi  | ${SHELL:-"/bin/sh"} &
+
